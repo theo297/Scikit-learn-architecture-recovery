@@ -15,7 +15,7 @@ Recovering the architecture of scikit-learn, focusing on:
 - Key design patterns
 - Data validation flow
 
-Member 1: Uwasan Teophill [2024326660270]
+### Member 1: Uwasan Teophill [2024326660270]
 
 **Role**: Core Infrastructure & Base System
 - **Primary Focus**:
