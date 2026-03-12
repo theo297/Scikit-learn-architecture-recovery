@@ -16,6 +16,7 @@ Recovering the architecture of scikit-learn, focusing on:
 - Data validation flow
 
 Member 1: Uwasan Teophill [2024326660270]
+
 **Role**: Core Infrastructure & Base System
 - **Primary Focus**:
   - BaseEstimator class hierarchy and inheritance patterns
