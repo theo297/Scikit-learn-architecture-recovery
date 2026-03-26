@@ -10,7 +10,7 @@ base_Estimator provides two core capabilities through inheritance:
 
  ### 1. Parameter Introspection
 
-```python
+```
 class MyEstimator(BaseEstimator):
     def __init__(self, alpha=1.0, max_iter=100):
         self.alpha = alpha
@@ -22,14 +22,14 @@ class MyEstimator(BaseEstimator):
 
 Without any additional code, get_params() returns:
 
-```python
+```
 >>> estimator.get_params()
 {'alpha': 1.0, 'max_iter': 100}
 ```
 
 Implementation:
 
-```python
+```
 @classmethod
 def _get_param_names(cls):
     init = cls.__init__
@@ -45,7 +45,7 @@ Why this matters: GridSearchCV relies on get_params() to know which hyperparamet
 
  ### 2. Storing objects with version information
 
- ```python
+ ```
 def __getstate__(self):
     state = self.__dict__.copy()
     if type(self).__module__.startswith("sklearn."):
@@ -67,12 +67,12 @@ When loading a pickled model from a different scikit-learn version, a warning is
 BaseEstimator also inherits from:
 
 
-* ReprHTMLMixin- Provides rich HTML display in Jupyter notebooks
+* ReprHTMLMixin (Provides rich HTML display in Jupyter notebooks)
 
-* _HTMLDocumentationLinkMixin- Adds documentation links to representations
+* _HTMLDocumentationLinkMixin (Adds documentation links to representations)
 
-* _MetadataRequester- Enables metadata routing (sample weights, etc.)
-Closes #123
+* _MetadataRequester (Enables metadata routing (sample weights, etc.))
+
 
 These are not provided by BaseEstimator itself but by parent classes in the inheritance chain.
 
@@ -81,7 +81,7 @@ These are not provided by BaseEstimator itself but by parent classes in the inhe
 
 BaseEstimator enforces a strict rule at class definition time:
 
-```python
+```
 for p in parameters:
     if p.kind == p.VAR_POSITIONAL:
         raise RuntimeError(
@@ -101,7 +101,7 @@ Mixins add identity without requiring deep inheritance hierarchies.
 
 **class ClassifierMixin:**
 
-```python
+```
     def __sklearn_tags__(self):
         tags = super().__sklearn_tags__()
         tags.estimator_type = "classifier"
@@ -125,7 +125,7 @@ Effects:
 
 **RegressorMixin**
 
-```python
+```
 class RegressorMixin:
     def __sklearn_tags__(self):
         tags = super().__sklearn_tags__()
@@ -140,7 +140,7 @@ class RegressorMixin:
 
 **TransformerMixin**
 
-```python
+```
 class TransformerMixin(_SetOutputMixin):
     def fit_transform(self, X, y=None, **fit_params):
         if y is None:
@@ -153,7 +153,7 @@ Provides default fit_transform() implementation. Many transformers override this
 
 
 ## The Clone Function 
-```python
+```
 def clone(estimator, *, safe=True):
     """Construct a new unfitted estimator with the same parameters."""
     if hasattr(estimator, "__sklearn_clone__"):
@@ -163,7 +163,7 @@ def clone(estimator, *, safe=True):
 
 Recursive cloning:
 
-```python
+```
 def _clone_parametrized(estimator, *, safe=True):
     new_object_params = estimator.get_params(deep=False)
     for name, param in new_object_params.items():
@@ -185,7 +185,7 @@ Use cases:
 
 scikit-learn uses a tags system for estimator introspection:
 
-```python
+```
 def __sklearn_tags__(self):
     return Tags(
         estimator_type=None,
@@ -198,7 +198,7 @@ def __sklearn_tags__(self):
 
 Mixins override this:
 
-```python
+```
 # In ClassifierMixin:
 def __sklearn_tags__(self):
     tags = super().__sklearn_tags__()
@@ -209,7 +209,7 @@ def __sklearn_tags__(self):
 
 Helper functions use tags, not isinstance():
 
-```python
+```
 def is_classifier(estimator):
     return get_tags(estimator).estimator_type == "classifier"
 
@@ -227,7 +227,7 @@ Advantages:
 
 ## Parameter Validation 
 
-```python
+```
 def _validate_params(self):
     validate_parameter_constraints(
         self._parameter_constraints,
@@ -238,7 +238,7 @@ def _validate_params(self):
 
 Each estimator defines _parameter_constraints as a class variable:
 
-```python
+```
 class LogisticRegression:
     _parameter_constraints = {
         "penalty": [StrOptions({"l1", "l2", "elasticnet", None})],
@@ -251,7 +251,7 @@ Validation occurs during fit(), not __init__(), allowing temporary invalid state
 
 ## _fit_context Decorator 
 
-```python
+```
 def _fit_context(*, prefer_skip_nested_validation):
     """Decorator to run fit methods within context managers."""
     def decorator(fit_method):
@@ -271,7 +271,7 @@ def _fit_context(*, prefer_skip_nested_validation):
 
 Used on all estimator fit() methods:
 
-```python
+```
 class LogisticRegression(BaseEstimator):
     @_fit_context(prefer_skip_nested_validation=True)
     def fit(self, X, y):
@@ -282,18 +282,20 @@ Purpose: Skips nested validation when already validated at higher levels, improv
 
 ## Inheritance Hierarchy 
 
-- BaseEstimator
-   - ↓
-      - LinearModel 
-        - ↓
-          - LinearClassifierMixin 
-            - ↓
-              - LogisticRegression
+```
+BaseEstimator
+    ↓
+LinearModel 
+    ↓
+LinearClassifierMixin 
+    ↓
+LogisticRegression
+```
 
 
 But LinearClassifierMixin inherits from ClassifierMixin and LinearModel, creating multiple inheritance:
 
-```python
+```
 class LogisticRegression(LinearClassifierMixin, BaseEstimator):
     # LinearClassifierMixin inherits from ClassifierMixin and LinearModel
     pass
