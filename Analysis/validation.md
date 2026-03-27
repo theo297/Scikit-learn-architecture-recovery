@@ -281,11 +281,11 @@ fit() called
     ↓
 check_X_y() / check_array()
     ↓
-_assert_all_finite() (fast sum check)
+_assert_all_finite() 
     ↓
-_ensure_sparse_format() (if sparse)
+_ensure_sparse_format() 
     ↓
-_validate_params() (from base.py)
+_validate_params() 
     ↓
 Training code runs with validated data
 
@@ -293,7 +293,7 @@ predict() called
     ↓
 check_is_fitted()
     ↓
-check_array() (validate prediction input)
+check_array() 
     ↓
 Prediction code
 ```
