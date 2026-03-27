@@ -1,5 +1,5 @@
 # Validation Architecture 
-**Source:**:
+**Source**:
 - sklearn/utils/validation.py (Main validation functions)
 - sklearn/utils/_param_validation.py 
 - sklearn/utils/_missing.py 
