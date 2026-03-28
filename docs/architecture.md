@@ -98,7 +98,7 @@ The following decisions were made early in scikit-learn's development and are no
 
 ### 4.1 Estimator Abstraction Layer
 
-**Reference:** `sklearn/base.py`
+**Reference:** sklearn/base.py
 
 This layer defines the contract that all estimators must follow. The BaseEstimator class provides:
 
@@ -111,15 +111,15 @@ Key Insight: The get_params and set_params mechanism enables meta-estimators lik
 
 Mixin Classes:
 
-- ClassifierMixin at line 291: Marker for classifiers, defines `_estimator_type = classifier`
-- RegressorMixin at line 297: Marker for regressors, defines `_estimator_type = regressor`
+- ClassifierMixin at line 291: Marker for classifiers, defines _estimator_type = classifier
+- RegressorMixin at line 297: Marker for regressors, defines _estimator_type = regressor
 - TransformerMixin at line 275: Adds fit_transform method
 
 These mixins allow meta-estimators to determine at runtime whether they are working with a classifier, regressor, or transformer, enabling appropriate behavior.
 
 ### 4.2 Implementation Layer
 
-**Reference:** `sklearn/linear_model/`, `sklearn/ensemble/`, `sklearn/tree/`
+**Reference:** sklearn/linear_model/, sklearn/ensemble/, sklearn/tree/
 
 This layer contains concrete implementations of machine learning algorithms. Each implementation:
 
@@ -128,7 +128,7 @@ This layer contains concrete implementations of machine learning algorithms. Eac
 - May incorporate appropriate mixins such as ClassifierMixin for classifiers
 - Calls validation utilities at the start of fit
 
-Example from LogisticRegression in `sklearn/linear_model/_logistic.py`:
+Example from LogisticRegression in  sklearn/linear_model/_logistic.py :
 
 ```
 class LogisticRegression(LinearClassifierMixin, BaseEstimator):
@@ -143,7 +143,7 @@ class LogisticRegression(LinearClassifierMixin, BaseEstimator):
 
 ### 4.3 Validation Layer
 
-**Reference:** `sklearn/utils/validation.py`
+**Reference:** sklearn/utils/validation.py
 
 This is not a separate physical layer but a cross-cutting concern invoked at the beginning of most fit methods. Key validation functions:
 
@@ -452,31 +452,13 @@ Evidence: The CONTRIBUTING.md file shows how the contributor community is organi
 
 ---
 
-## 12. References
-
-| Component | File Location | Key Lines |
-|-----------|---------------|-----------|
-| BaseEstimator | sklearn/base.py | 67-260 |
-| ClassifierMixin | sklearn/base.py | 291 |
-| TransformerMixin | sklearn/base.py | 275 |
-| Pipeline | sklearn/pipeline.py | 434-700 |
-| Validation Utilities | sklearn/utils/validation.py | 925-1300 |
-| LogisticRegression | sklearn/linear_model/_logistic.py | Full class |
-| GridSearchCV | sklearn/model_selection/_search.py | Full class |
-
----
-
-## 13. Limitations of This Recovery
+## 12. Limitations of This Recovery
 
 This architecture recovery represents the logical architecture rather than every physical implementation detail. Some complexities not captured include:
 
-- Cython modules: Performance-critical code such as `_tree.pyx` is implemented in Cython and not visible in pure Python analysis
+- Cython modules: Performance-critical code such as _tree.pyx is implemented in Cython and not visible in pure Python analysis
 - Configuration flags: Some behavior changes based on global configuration settings
 - Legacy code: Older parts of the library may not fully conform to patterns established in newer code
 - Dynamic behavior: Some runtime behavior depends on data characteristics and cannot be fully captured through static analysis
 
 ---
-
-*Document created for Software Architecture Course Project*
-*Based on scikit-learn version 1.6.x*
-*Recovery completed using static code analysis and structure mapping techniques*
