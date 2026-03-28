@@ -30,8 +30,8 @@ At the heart of scikit-learn lies the Estimator abstraction. Any object that can
 
 Code Evidence:
 
-- `sklearn/base.py` defines BaseEstimator, the foundation class for all estimators
-- `sklearn/base.py` defines ClassifierMixin and RegressorMixin which add behavioral contracts
+- sklearn/base.py defines BaseEstimator, the foundation class for all estimators
+- sklearn/base.py defines ClassifierMixin and RegressorMixin which add behavioral contracts
 
 ### 2.2 Mapping to Course Concepts: Three Structure Categories
 
