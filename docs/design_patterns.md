@@ -1,6 +1,3 @@
-You're welcome! Yes, `system_overview.md` contains all the required high-level information that complements the detailed `architecture.md`. Now here is your complete `design_patterns.md` with the same professional formatting, proper code blocks, and no AI-looking quotation marks:
-
----
 
 # Design Patterns in scikit-learn
 
@@ -594,32 +591,6 @@ pipeline = pipeline.add_step('classifier', LogisticRegression())
 
 The patterns in scikit-learn work together to create a cohesive architecture:
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         USER CODE                               │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  Strategy Pattern          │  Composite Pattern                │
-│  (Algorithms are           │  (Pipeline combines              │
-│   interchangeable)         │   strategies)                     │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  Template Method Pattern   │  Factory Pattern                  │
-│  (Base classes define      │  (make_pipeline simplifies       │
-│   algorithm skeleton)      │   creation)                       │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  Adapter Pattern           │  Decorator Pattern                │
-│  (FunctionTransformer      │  (_fit_context adds               │
-│   adapts functions)        │   cross-cutting concerns)         │
-└─────────────────────────────────────────────────────────────────┘
-```
 
 **How Patterns Work Together:**
 
@@ -684,10 +655,5 @@ The patterns also align with the library's design principles: simplicity for use
 | Adapter | sklearn/preprocessing/_function_transformer.py | FunctionTransformer class |
 | Decorator | sklearn/base.py | _fit_context decorator |
 
----
-
-*Document created for Software Architecture Course Project*
-*Based on scikit-learn version 1.6.x*
-*Pattern analysis completed through code review and structure mapping*
 
 
