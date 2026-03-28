@@ -66,47 +66,13 @@ scikit-learn follows a layered architectural style centered around a unified abs
 
 The following diagram shows the high-level architectural layers:
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                     USER APPLICATIONS                           │
-│          (Jupyter notebooks, scripts, web services)             │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                       API LAYER                                 │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  Unified Interface: fit(), predict(), transform()       │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    ABSTRACTION LAYER                            │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │  BaseEstimator │ ClassifierMixin │ RegressorMixin      │   │
-│  │  TransformerMixin │ Parameter Management                │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                  IMPLEMENTATION LAYER                           │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐           │
-│  │ Linear Models│ │    Trees     │ │   Ensemble   │           │
-│  ├──────────────┤ ├──────────────┤ ├──────────────┤           │
-│  │     SVM      │ │   Clustering │ │ Dimensionality│          │
-│  └──────────────┘ └──────────────┘ └──────────────┘           │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-                                ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    UTILITY LAYER                                │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐           │
-│  │  Validation  │ │   Metrics    │ │    Utils     │           │
-│  └──────────────┘ └──────────────┘ └──────────────┘           │
-└─────────────────────────────────────────────────────────────────┘
-```
+
+
+
+
+
+
+
 
 Each layer has specific responsibilities and depends primarily on the layers below it.
 
@@ -231,40 +197,17 @@ Component-and-connector structures describe how elements interact at runtime.
 
 The primary runtime interaction is method calls between components:
 
-```
-User Code ──fit──→ Estimator
-    │                    │
-    │                    │ (calls validation)
-    │                    ▼
-    │              validation.py
-    │                    │
-    │                    │ (returns validated data)
-    │                    ▼
-    └──────←──────      Estimator
-                      (stores learned parameters)
-```
+
+
+
 
 **Concurrency Structure**
 
 Parallelism is achieved through the joblib library:
 
-```
-Estimator with n_jobs > 1
-         │
-         ▼
-    joblib.Parallel
-         │
-    ┌────┼────┬────┐
-    ▼    ▼    ▼    ▼
-  CPU0 CPU1 CPU2 CPU3
-    │    │    │    │
-    └────┼────┴────┘
-         ▼
-    joblib.parallel_backend
-         │
-         ▼
-    Aggregated Results
-```
+
+
+
 
 ### 6.3 Allocation Structures
 
@@ -407,72 +350,19 @@ Understanding the architecture helps users understand common workflows.
 
 ### 9.1 Simple Training Workflow
 
-```
-Data Preparation
-      │
-      ▼
-Create Estimator
-      │
-      ▼
-Call fit (input validation occurs)
-      │
-      ▼
-Algorithm learns parameters
-      │
-      ▼
-Call predict (new data)
-      │
-      ▼
-Return predictions
-```
+
+
+
 
 ### 9.2 Pipeline Workflow
 
-```
-Raw Data
-      │
-      ▼
-┌─────────────────────────────────────────┐
-│  Pipeline                               │
-│  ┌─────────────┐   ┌─────────────┐      │
-│  │  Step 1     │ → │  Step 2     │      │
-│  │  Standard   │   │  Random     │      │
-│  │  Scaler     │   │  Forest     │      │
-│  └─────────────┘   └─────────────┘      │
-│         │                 │              │
-│         ▼                 ▼              │
-│    transform         fit/predict        │
-└─────────────────────────────────────────┘
-      │
-      ▼
-Final Predictions
-```
+
+
+
 
 ### 9.3 Grid Search Workflow
 
-```
-Estimator with parameters
-      │
-      ▼
-GridSearchCV (meta-estimator)
-      │
-      ├── For each parameter combination
-      │   │
-      │   ▼
-      │   Create estimator with parameters
-      │   │
-      │   ▼
-      │   Run cross-validation
-      │   │
-      │   ▼
-      │   Record score
-      │
-      ▼
-Select best parameters
-      │
-      ▼
-Return best estimator
-```
+
 
 ---
 
