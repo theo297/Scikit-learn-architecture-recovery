@@ -562,7 +562,7 @@ The patterns also align with the library's design principles: simplicity for use
 | Pattern | Primary File | Key Lines |
 |---------|--------------|-----------|
 |Strategy	|sklearn/base.py	|67-260
-|Composite	sklearn/pipeline.py	|434-700
+|Composite	| sklearn/pipeline.py	|434-700
 |Template Method|	sklearn/base.py	|67-260, 516
 |Factory	|sklearn/pipeline.py	|make_pipeline function
 |Adapter	|sklearn/preprocessing/_function_transformer.py	|Full class
