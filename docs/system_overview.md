@@ -190,10 +190,6 @@ The primary runtime interaction is method calls between components
 Parallelism is achieved through the joblib library
 <img width="599" height="1453" alt="Screenshot 2026-03-30 161059" src="https://github.com/user-attachments/assets/2ce48c7d-7fe9-41d4-b97e-c947094535c2" />
 
-**Concurrency Structure**
-
-Parallelism is achieved through the joblib library:
-
 ### 6.3 Allocation Structures
 
 Allocation structures map software to environments.
