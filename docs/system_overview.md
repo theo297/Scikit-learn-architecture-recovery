@@ -330,15 +330,13 @@ Evidence: Works on Windows, Linux, macOS, and in cloud environments.
 Understanding the architecture helps users understand common workflows.
 
 ### 9.1 Simple Training Workflow
-
+<img width="827" height="865" alt="image" src="https://github.com/user-attachments/assets/7bb3c500-6153-4035-a91c-a871d446ae56" />
 
 ### 9.2 Pipeline Workflow
-
-
+<img width="829" height="1476" alt="image" src="https://github.com/user-attachments/assets/0cce1a45-bb20-46f7-87c1-883d9bdafb8e" />
 
 ### 9.3 Grid Search Workflow
-
-
+<img width="681" height="1391" alt="image" src="https://github.com/user-attachments/assets/1a1e2e81-6b29-4168-bab9-fc527a5bb609" />
 
 ---
 
