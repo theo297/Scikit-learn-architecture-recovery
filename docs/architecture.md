@@ -92,7 +92,7 @@ The following decisions were made early in scikit-learn's development and are no
 
 ## 3. High-Level Architecture Diagram
 
-<img width="815" height="1336" alt="Screenshot 2026-03-30 124847" src="https://github.com/user-attachments/assets/0ffe1864-5b4b-4771-99c8-c2c909802932" />
+<img width="968" height="1508" alt="Screenshot 2026-03-30 125427" src="https://github.com/user-attachments/assets/a7ad72e5-82bc-4ef6-adde-bd40eec896dd" />
 
 ---
 
