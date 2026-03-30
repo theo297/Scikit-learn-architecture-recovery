@@ -423,7 +423,7 @@ The modules can be classified as follows:
 
 
 
-## Module Dependency Graph
+## Module Dependency DIAGRAM:
 ```
                 ┌───────────────┐
                 │  externals/   │
