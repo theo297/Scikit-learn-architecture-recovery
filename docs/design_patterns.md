@@ -591,17 +591,11 @@ pipeline = pipeline.add_step('classifier', LogisticRegression())
 
 The patterns in scikit-learn work together to create a cohesive architecture:
 
+<img width="607" height="888" alt="Screenshot 2026-03-30 193129" src="https://github.com/user-attachments/assets/e5379883-677d-48fe-ad35-4ec6bfbb8048" />
+<img width="575" height="772" alt="Screenshot 2026-03-30 193135" src="https://github.com/user-attachments/assets/ef5a553d-1c68-4c73-b3e2-2708f1d8532d" />
+<img width="664" height="1414" alt="Screenshot 2026-03-30 193141" src="https://github.com/user-attachments/assets/b8edc2e4-a186-4f97-b0be-d3e209bcedee" />
 
-**How Patterns Work Together:**
-
-| Combination | How They Interact |
-|-------------|-------------------|
-| Strategy + Composite | Pipeline composites strategies; strategies remain interchangeable |
-| Template Method + Strategy | Template defines structure; strategy provides implementation |
-| Factory + Composite | Factory simplifies creation of composites |
-| Adapter + Composite | Adapters allow non-strategies to become composite leaves |
-
----
+----
 
 ## 9. Why These Patterns Matter
 
