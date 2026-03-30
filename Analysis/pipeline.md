@@ -92,27 +92,29 @@ def predict(self, X):
 #### Data Flow Diagram 
 
 ```
-Raw Data (X)
-    ↓
+            Raw Data (X)
+                 ↓
 ┌─────────────────────────────────────┐
 │ Step 1: StandardScaler              │
 │  fit_transform() → learns mean, std │
 │  transform() → applies scaling      │
 └─────────────────────────────────────┘
-    ↓ (scaled data)
+            (scaled data)
+                 ↓ 
 ┌─────────────────────────────────────┐
 │ Step 2: PCA                         │
 │  fit_transform() → learns components│
 │  transform() → projects onto PCs    │
 └─────────────────────────────────────┘
-    ↓ (reduced data)
+            (reduced data)
+                 ↓
 ┌─────────────────────────────────────┐
 │ Step 3: SVC                         │
 │  fit() → learns decision boundary   │
 │  predict() → class predictions      │
 └─────────────────────────────────────┘
-    ↓
-Predictions
+                 ↓
+             Predictions
 ```
 
 
