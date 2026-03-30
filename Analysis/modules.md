@@ -1,4 +1,4 @@
-# Scikit-learn Module Architecture
+# Module Architecture
 
 **Source:** sklearn/
 ## Summary 
