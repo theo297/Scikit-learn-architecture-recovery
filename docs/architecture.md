@@ -2,7 +2,7 @@
 
 ## 1. Architecture Recovery Method
 
-This architecture was recovered using a combination of:
+This architecture was recovered using a combination of:A
 
 - Static code analysis of the scikit-learn source code version 1.6.x
 - Directory structure analysis to identify module organization
@@ -91,6 +91,8 @@ The following decisions were made early in scikit-learn's development and are no
 ---
 
 ## 3. High-Level Architecture Diagram
+
+<img width="815" height="1336" alt="Screenshot 2026-03-30 124847" src="https://github.com/user-attachments/assets/0ffe1864-5b4b-4771-99c8-c2c909802932" />
 
 ---
 
@@ -245,6 +247,8 @@ def fit(self, X, y):
 
 ### 5.4 Pipeline Architecture
 
+<img width="868" height="1137" alt="Screenshot 2026-03-30 124859" src="https://github.com/user-attachments/assets/bd6e1897-8778-4b11-a6d3-8be2ce7583ed" />
+
 **Reference:** sklearn/pipeline.py
 
 The Pipeline is a critical architectural component that enables workflow composition:
@@ -306,6 +310,7 @@ This allows clients to treat individual estimators and entire pipelines identica
 
 The diagram below illustrates the inheritance and composition relationships:
 
+<img width="865" height="1250" alt="Screenshot 2026-03-30 124908" src="https://github.com/user-attachments/assets/38f1bd63-231f-43d4-a827-c69228800c19" />
 
 Key relationships:
 
