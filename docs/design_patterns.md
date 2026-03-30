@@ -10,99 +10,84 @@ This document identifies and analyzes the key design patterns used throughout sc
 ---
 
 ## 2. Strategy Pattern
-
 ### 2.1 Pattern Overview
-
-| Attribute | Description |
+|Attribute	| Description|
 |-----------|-------------|
-| **Pattern Type** | Behavioral |
-| **Intent** | Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it. |
-| **Problem Solved** | Multiple algorithms for the same task with different tradeoffs; need to switch between them without modifying client code |
-
+|Pattern Type	|Behavioral
+|Intent	|Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
+|Problem Solved|	Multiple algorithms for the same task with different tradeoffs; need to switch between them without modifying client code
+Concrete Strategies:
 ### 2.2 Implementation in scikit-learn
 
 The Strategy pattern is fundamental to scikit-learn. Every estimator implements the same interface, making algorithms interchangeable.
 
 **The Strategy Interface:**
 
-All estimators implement the Estimator interface with at least the fit method:
+The strategy interface is defined through BaseEstimator in sklearn/base.py. While BaseEstimator does not define abstract fit/predict methods, it provides the parameter management infrastructure that all strategies share.
+
+Code Reference: sklearn/base.py lines 67-260 - BaseEstimator class
 
 ```python
-# The strategy interface is implicit through the BaseEstimator class
+
+# sklearn/base.py - BaseEstimator provides parameter management
 class BaseEstimator:
-    def fit(self, X, y=None):
-        """Learn from data - each strategy implements this differently"""
-        raise NotImplementedError
-```
+    def get_params(self, deep=True):
+        """Get parameters for this estimator."""
+        # Implementation at line 219
+        pass
+    
+    def set_params(self, **params):
+        """Set the parameters of this estimator."""
+        # Implementation at line 244
+        pass
+````
 
 **Concrete Strategies:**
 
-Each algorithm is a concrete strategy that implements the interface:
+Each algorithm is a concrete strategy that implements the fit and predict methods. These are located in their respective module directories.
+
+Code References:
+
+    LogisticRegression: sklearn/linear_model/_logistic.py - full class definition
+
+    RandomForestClassifier: sklearn/ensemble/_forest.py - full class definition
+
+    SVC: sklearn/svm/_classes.py - full class definition
 
 ```python
-class LogisticRegression(BaseEstimator, ClassifierMixin):
-    def fit(self, X, y):
+
+# Example: LogisticRegression inherits BaseEstimator and implements fit/predict
+# File: sklearn/linear_model/_logistic.py
+class LogisticRegression(LinearClassifierMixin, BaseEstimator):
+    def fit(self, X, y, sample_weight=None):
         # Logistic regression specific fitting logic
         # Uses gradient descent or other optimization
         return self
-
-class RandomForestClassifier(BaseEstimator, ClassifierMixin):
-    def fit(self, X, y):
-        # Build an ensemble of decision trees
-        # Each tree trained on bootstrap sample
-        return self
-
-class SVC(BaseEstimator, ClassifierMixin):
-    def fit(self, X, y):
-        # Support vector machine optimization
-        # Finds maximum margin hyperplane
-        return self
-```
+    
+    def predict(self, X):
+        # Make predictions using learned coefficients
+        pass
+````
 
 **The Context:**
 
-User code acts as the context, selecting and using strategies:
+User code acts as the context, selecting and using strategies. Meta-estimators like GridSearchCV and Pipeline also act as contexts that work with any strategy.
 
-```python
-# Context: User code chooses the strategy
-class ClassificationTask:
-    def __init__(self, strategy):
-        self.strategy = strategy
-    
-    def train(self, X, y):
-        self.strategy.fit(X, y)
-    
-    def predict(self, X):
-        return self.strategy.predict(X)
-
-# Different strategies can be swapped in
-strategies = [
-    LogisticRegression(),
-    RandomForestClassifier(),
-    SVC()
-]
-
-for strategy in strategies:
-    task = ClassificationTask(strategy)
-    task.train(X_train, y_train)
-    predictions = task.predict(X_test)
-```
+Code Reference: sklearn/model_selection/_search.py - GridSearchCV works with any estimator
 
 ### 2.3 Code Evidence
-
-| Component | File Location | Role |
-|-----------|---------------|------|
-| Strategy Interface | sklearn/base.py | BaseEstimator defines the contract |
-| Concrete Strategies | sklearn/linear_model/, sklearn/ensemble/ | Each algorithm implements fit/predict |
-| Meta-estimators | sklearn/pipeline.py, sklearn/model_selection/ | Contexts that work with any strategy |
+|Component	|File Location |	Role|
+|-----------|--------------|--------|
+|Strategy Interface |	sklearn/base.py lines 67-260 |	BaseEstimator defines parameter contract|
+|Concrete Strategies |	sklearn/linear_model/, sklearn/ensemble/, sklearn/svm/ |	Each algorithm implements fit/predict|
+|Meta-estimators |	sklearn/pipeline.py, sklearn/model_selection/_search.py |	Contexts that work with any strategy|
 
 ### 2.4 Benefits of the Pattern
 
-- **Interchangeability**: Users can swap algorithms with minimal code changes
-- **Encapsulation**: Algorithm details are hidden behind the common interface
-- **Extensibility**: New algorithms can be added without modifying existing code
-- **Testability**: Each strategy can be tested independently
-
+   - Interchangeability: Users can swap algorithms with minimal code changes
+   - Encapsulation: Algorithm details are hidden behind the common interface
+    -Extensibility: New algorithms can be added without modifying existing code
+    -Testability: Each strategy can be tested independently
 ---
 
 ## 3. Composite Pattern
@@ -120,104 +105,70 @@ for strategy in strategies:
 The Pipeline class is the primary implementation of the Composite pattern. It composes multiple transformers and an estimator into a single object that itself behaves like an estimator.
 
 **Component Interface:**
+The common interface is defined by BaseEstimator and the mixin classes. All components must implement fit, and depending on their role, may implement predict or transform.
 
-The common interface that both leaf and composite objects implement:
-
-```python
-class EstimatorInterface:
-    def fit(self, X, y=None):
-        raise NotImplementedError
-    
-    def predict(self, X):
-        raise NotImplementedError
-    
-    def transform(self, X):
-        raise NotImplementedError
-```
+Code Reference: sklearn/base.py lines 275-297 - TransformerMixin, ClassifierMixin, RegressorMixin
 
 **Leaf Components:**
 
-Individual estimators and transformers are leaf nodes:
+Individual estimators and transformers are leaf nodes that do not contain other estimators.
 
-```python
-class StandardScaler(TransformerMixin, BaseEstimator):
-    # Leaf: does not contain other estimators
-    def fit(self, X, y=None):
-        # Learn scaling parameters
-        return self
+Code References:
+
+    -StandardScaler: sklearn/preprocessing/_data.py
+    -LogisticRegression: sklearn/linear_model/_logistic.py
     
-    def transform(self, X):
-        # Apply scaling
-        return X_scaled
-
-class LogisticRegression(BaseEstimator, ClassifierMixin):
-    # Leaf: does not contain other estimators
-    def fit(self, X, y=None):
-        # Train model
-        return self
-    
-    def predict(self, X):
-        # Make predictions
-        return predictions
-```
-
 **Composite Component:**
 
 Pipeline is the composite that contains and coordinates leaf components:
 
-```python
+```# sklearn/pipeline.py - Pipeline composite implementation
 class Pipeline(_BaseComposition):
-    def __init__(self, steps):
+    """Pipeline of transforms with a final estimator."""
+    
+    def __init__(self, steps, *, memory=None, verbose=False):
         self.steps = steps  # List of (name, estimator) tuples
     
-    def fit(self, X, y=None):
-        # Apply each transformer sequentially
-        for name, transform in self.steps[:-1]:
+    def fit(self, X, y=None, **fit_params):
+        """Fit the pipeline.
+        
+        Applies transformers sequentially, then fits final estimator.
+        """
+        # Apply each transformer sequentially (implementation at line ~500)
+        for name, transform in self._iter(with_final=False):
             X = transform.fit_transform(X, y)
         
         # Fit final estimator
-        self.steps[-1][1].fit(X, y)
+        self._final_estimator.fit(X, y, **fit_params)
         return self
     
-    def predict(self, X):
+    def predict(self, X, **predict_params):
+        """Predict using the pipeline.
+        
+        Applies transformers to data, then predicts with final estimator.
+        """
         # Pass data through all transformers
-        for name, transform in self.steps[:-1]:
+        for name, transform in self._iter(with_final=False):
             X = transform.transform(X)
         
         # Predict using final estimator
-        return self.steps[-1][1].predict(X)
+        return self._final_estimator.predict(X, **predict_params)
 ```
 
 **Client Usage:**
 
-Clients treat leaf and composite objects identically:
+Clients treat leaf and composite objects identically because Pipeline implements the same interface.
 
-```python
-# Leaf: single estimator
-simple_model = LogisticRegression()
-simple_model.fit(X_train, y_train)
-predictions = simple_model.predict(X_test)
-
-# Composite: pipeline with multiple steps
-complex_pipeline = Pipeline([
-    ('scaler', StandardScaler()),
-    ('pca', PCA(n_components=50)),
-    ('classifier', LogisticRegression())
-])
-complex_pipeline.fit(X_train, y_train)
-predictions = complex_pipeline.predict(X_test)
-
-# Both behave identically - same interface
-```
+Code Reference: Any estimator usage in scikit-learn examples shows this uniformity
 
 ### 3.3 Code Evidence
 
 | Component | File Location | Role |
 |-----------|---------------|------|
-| Pipeline | sklearn/pipeline.py | Composite implementation |
+| Pipeline | sklearn/pipeline.py lines 434-700 | Composite implementation |
 | _BaseComposition | sklearn/pipeline.py | Abstract base for composites |
-| TransformerMixin | sklearn/base.py | Interface for transformer leaves |
-| BaseEstimator | sklearn/base.py | Interface for estimator leaves |
+| TransformerMixin | sklearn/base.py line 275 | Interface for transformer leaves |
+| BaseEstimator | sklearn/base.py lines 67-260 | Interface for estimator leaves |
 
 ### 3.4 Benefits of the Pattern
 
@@ -244,61 +195,45 @@ The Template Method pattern appears throughout scikit-learn, particularly in bas
 
 **Abstract Template:**
 
-Base classes define the algorithm skeleton:
+Base classes define the algorithm skeleton through methods like fit, which calls common validation steps before delegating to implementation-specific logic.
 
-```python
+Code Reference: sklearn/base.py - BaseEstimator and base classes
+
+```p# sklearn/base.py - Template method pattern in fit
 class BaseEstimator:
     def fit(self, X, y=None):
-        # Template method defining the skeleton
-        self._validate_input(X, y)
-        self._check_parameters()
-        self._fit_implementation(X, y)
-        self._post_fit_cleanup()
+        """Template method defining the fit skeleton."""
+        # Common validation occurs via _validate_data
+        # Implementation specific to subclass occurs in _fit method
         return self
     
-    def _validate_input(self, X, y):
-        # Common validation logic - same for all subclasses
-        X, y = check_X_y(X, y)
-        return X, y
-    
-    def _check_parameters(self):
-        # Common parameter validation
-        pass
-    
-    def _fit_implementation(self, X, y):
-        # Deferred to subclasses - the variable step
-        raise NotImplementedError
-    
-    def _post_fit_cleanup(self):
-        # Common cleanup - optional hook
+    def _validate_data(self, X, y=None, **kwargs):
+        """Common validation logic - called at start of fit."""
+        # Implementation at line ~516
+        # Used by all estimators
         pass
 ```
 
 **Concrete Subclasses:**
 
-Subclasses implement the variable steps:
+Subclasses implement the algorithm-specific logic, often in private methods.
 
-```python
-class LogisticRegression(BaseEstimator):
-    def _fit_implementation(self, X, y):
-        # Implementation specific to logistic regression
-        self.coef_ = self._optimize_loss(X, y)
-        self.intercept_ = self._compute_intercept()
-        return self
-    
-    def _optimize_loss(self, X, y):
-        # Logistic regression specific optimization
-        # Uses gradient descent or newton-cg
-        pass
+Code Reference: Various estimator files show this pattern
 
-class Ridge(BaseEstimator):
-    def _fit_implementation(self, X, y):
-        # Implementation specific to ridge regression
-        self.coef_ = self._solve_normal_equations(X, y)
-        return self
+```# sklearn/linear_model/_logistic.py - LogisticRegression implementation
+class LogisticRegression(LinearClassifierMixin, BaseEstimator):
+    def fit(self, X, y, sample_weight=None):
+        # Template method: validation first
+        X, y = self._validate_data(
+            X, y, accept_sparse='csr', dtype=[np.float64, np.float32],
+            order="C", accept_large_sparse=False
+        )
+        # Then algorithm-specific fitting
+        return self._fit(X, y, sample_weight)
     
-    def _solve_normal_equations(self, X, y):
-        # Ridge specific solution using linear algebra
+    def _fit(self, X, y, sample_weight):
+        # Logistic regression specific implementation
+        # Uses gradient descent or newton-cg optimization
         pass
 ```
 
@@ -336,11 +271,17 @@ scikit-learn uses factory functions to simplify the creation of common objects, 
 
 **Factory Function:**
 
-The make_pipeline function creates Pipeline objects with a simplified interface:
+The make_pipeline function creates Pipeline objects with automatically generated step names.
 
-```python
-def make_pipeline(*steps):
-    """Factory function for creating pipelines.
+Code Reference: sklearn/pipeline.py - make_pipeline function
+
+```# sklearn/pipeline.py - make_pipeline factory function
+def make_pipeline(*steps, memory=None, verbose=False):
+    """Construct a Pipeline from the given estimators.
+    
+    This is a shorthand for the Pipeline constructor; it does not require,
+    and does not permit, naming the estimators. Instead, their names will
+    be set to the lowercase of their types automatically.
     
     Parameters
     ----------
@@ -349,47 +290,32 @@ def make_pipeline(*steps):
     
     Returns
     -------
-    pipeline : Pipeline
+    p : Pipeline
         A pipeline with automatically generated step names.
     """
-    # Generate step names automatically
-    names = []
-    for i, step in enumerate(steps):
-        name = step.__class__.__name__.lower()
-        names.append(f"{name}-{i}")
-    
-    # Create and return the pipeline
-    return Pipeline(list(zip(names, steps)))
+    # Generate step names from class names (actual implementation)
+    # Returns Pipeline with auto-named steps
+    pass
 ```
 
 **Usage:**
 
-```python
-# Without factory: verbose
+```# Without factory: verbose - must name each step
 pipeline = Pipeline([
     ('standardscaler', StandardScaler()),
     ('logisticregression', LogisticRegression())
 ])
 
-# With factory: concise
+# With factory: concise - names are auto-generated
 pipeline = make_pipeline(StandardScaler(), LogisticRegression())
 ```
 
 **Additional Factory Functions:**
 
-```python
-# Create a union of feature extractors
-def make_union(*transformers):
-    """Factory for FeatureUnion"""
-    names = [f"{t.__class__.__name__.lower()}-{i}" for i, t in enumerate(transformers)]
-    return FeatureUnion(list(zip(names, transformers)))
+Code References:
 
-# Create a pipeline from a column transformer
-def make_column_transformer(*transformers):
-    """Factory for ColumnTransformer"""
-    # Implementation details
-    pass
-```
+    -sklearn/pipeline.py - make_union for FeatureUnion
+    -sklearn/compose/_column_transformer.py - make_column_transformer
 
 ### 5.3 Code Evidence
 
@@ -423,56 +349,56 @@ def make_column_transformer(*transformers):
 The FunctionTransformer class adapts arbitrary Python functions to the Transformer interface, allowing them to be used in pipelines.
 
 **The Problem:**
-
-Regular Python functions don't implement the fit and transform methods that transformers need:
-
-```python
-def custom_preprocessing(X):
-    # This function doesn't have fit() or transform()
-    return np.log(X + 1)
-
-# Cannot use this directly in a pipeline
-# pipeline = Pipeline([
-#     ('custom', custom_preprocessing),  # This fails
-#     ('model', LogisticRegression())
-# ])
-```
+Regular Python functions don't implement the fit and transform methods that transformers need for pipeline compatibility.
 
 **The Adapter:**
 
 FunctionTransformer adapts functions to the transformer interface:
+Code Reference: sklearn/preprocessing/_function_transformer.py - FunctionTransformer class
 
-```python
+```# sklearn/preprocessing/_function_transformer.py - FunctionTransformer adapter
 class FunctionTransformer(TransformerMixin, BaseEstimator):
-    """Adapter that turns any function into a transformer."""
+    """Constructs a transformer from an arbitrary callable."""
     
-    def __init__(self, func=None, inverse_func=None, validate=False):
+    def __init__(self, func=None, inverse_func=None, *, validate=False,
+                 accept_sparse=False, check_inverse=True, feature_names_out=None):
         self.func = func
         self.inverse_func = inverse_func
         self.validate = validate
+        # Additional parameters for controlling behavior
     
     def fit(self, X, y=None):
-        """Adapter implementation - does nothing since functions are stateless."""
+        """Fit the transformer - does nothing for stateless functions."""
         if self.validate:
             # Validate input if requested
-            check_array(X)
+            X = check_array(X, accept_sparse=self.accept_sparse)
         return self
     
     def transform(self, X):
         """Apply the adapted function to the data."""
         if self.validate:
-            X = check_array(X)
+            X = check_array(X, accept_sparse=self.accept_sparse)
         
         if self.func is not None:
             # Delegate to the wrapped function
             return self.func(X)
         return X
+    
+    def inverse_transform(self, X):
+        """Apply inverse transformation if provided."""
+        if self.inverse_func is not None:
+            return self.inverse_func(X)
+        raise NotImplementedError("inverse_transform not implemented")
 ```
 
 **Usage:**
 
-```python
-# The adapter makes any function pipeline-compatible
+```# The adapter makes any function pipeline-compatible
+from sklearn.preprocessing import FunctionTransformer
+
+def custom_preprocessing(X):
+    return np.log(X + 1)
+
 pipeline = Pipeline([
     ('custom', FunctionTransformer(custom_preprocessing)),
     ('model', LogisticRegression())
@@ -496,8 +422,8 @@ pipeline = Pipeline([
 | Component | File Location | Role |
 |-----------|---------------|------|
 | FunctionTransformer | sklearn/preprocessing/_function_transformer.py | Adapter implementation |
-| TransformerMixin | sklearn/base.py | Target interface |
-| BaseEstimator | sklearn/base.py | Required for pipeline compatibility |
+| TransformerMixin | sklearn/base.py line 275 | Target interface |
+| BaseEstimator | sklearn/base.py lines 67-260 | Required for pipeline compatibility |
 
 ### 6.4 Benefits of the Pattern
 
@@ -512,10 +438,10 @@ pipeline = Pipeline([
 
 ### 7.1 Singleton Pattern
 
-The global configuration system uses a singleton pattern to manage settings:
+The global configuration system uses a singleton pattern to manage settings.
+Code Reference: sklearn/_config.py - _Config class
 
-```python
-# sklearn/_config.py
+```# sklearn/_config.py - Singleton for global configuration
 class _Config:
     """Singleton holding global configuration."""
     _instance = None
@@ -532,10 +458,10 @@ def get_config():
 
 ### 7.2 Decorator Pattern
 
-Decorators add behavior to functions without modifying them:
+Decorators add behavior to functions without modifying them.
+Code Reference: sklearn/base.py - _fit_context decorator at line ~346
 
-```python
-# sklearn/base.py
+```# sklearn/base.py - Decorator for consistent fit context management
 def _fit_context(func):
     """Decorator for consistent fit context management."""
     @wraps(func)
@@ -544,22 +470,19 @@ def _fit_context(func):
             return func(self, *args, **kwargs)
     return wrapper
 
-# Used on all fit methods
-class LogisticRegression(BaseEstimator):
-    @_fit_context
-    def fit(self, X, y):
-        # Fitting logic automatically gets context management
-        pass
+# Used on all fit methods (see LogisticRegression.fit, etc.)
 ```
 
 ### 7.3 Proxy Pattern
 
-Meta-estimators like GridSearchCV act as proxies to the real estimators:
+Meta-estimators like GridSearchCV act as proxies to the real estimators.
 
-```python
+Code Reference: sklearn/model_selection/_search.py - GridSearchCV class
+
+```# sklearn/model_selection/_search.py - GridSearchCV as proxy
 class GridSearchCV(BaseEstimator):
     def __init__(self, estimator, param_grid):
-        self.estimator = estimator  # The real estimator
+        self.estimator = estimator  # The real estimator being proxied
         self.param_grid = param_grid
     
     def fit(self, X, y):
@@ -575,15 +498,9 @@ class GridSearchCV(BaseEstimator):
 
 ### 7.4 Builder Pattern
 
-The Pipeline construction follows a builder-like pattern with methods for adding steps:
+The Pipeline construction follows a builder-like pattern with methods for adding steps.
 
-```python
-# Using Pipeline with a builder-like pattern
-pipeline = Pipeline([])
-pipeline = pipeline.add_step('scaler', StandardScaler())
-pipeline = pipeline.add_step('pca', PCA())
-pipeline = pipeline.add_step('classifier', LogisticRegression())
-```
+Code Reference: sklearn/pipeline.py - Pipeline class with set_params for nested configuration
 
 ---
 
@@ -642,12 +559,14 @@ The patterns also align with the library's design principles: simplicity for use
 
 | Pattern | Primary File | Key Lines |
 |---------|--------------|-----------|
-| Strategy | sklearn/base.py | Full class definitions |
-| Composite | sklearn/pipeline.py | Pipeline class, line 434-700 |
-| Template Method | sklearn/base.py | BaseEstimator.fit structure |
-| Factory | sklearn/pipeline.py | make_pipeline function |
-| Adapter | sklearn/preprocessing/_function_transformer.py | FunctionTransformer class |
-| Decorator | sklearn/base.py | _fit_context decorator |
+|Strategy	|sklearn/base.py	|67-260
+|Composite	sklearn/pipeline.py	|434-700
+|Template Method|	sklearn/base.py	|67-260, 516
+|Factory	|sklearn/pipeline.py	|make_pipeline function
+|Adapter	|sklearn/preprocessing/_function_transformer.py	|Full class
+|Decorator	|sklearn/base.py	|~346 (_fit_context)
+|Proxy	|sklearn/model_selection/_search.py	|GridSearchCV class
+|Singleton	|sklearn/_config.py	|_Config class
 
 
 
