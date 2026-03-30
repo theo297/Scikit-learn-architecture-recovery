@@ -64,7 +64,7 @@ scikit-learn follows a layered architectural style centered around a unified abs
 - **Composition-oriented**: Complex workflows are built by composing simple components using Pipeline
 
 The following diagram shows the high-level architectural layers:
-
+<img width="780" height="1495" alt="Screenshot 2026-03-30 161046" src="https://github.com/user-attachments/assets/b9434acf-a5ea-46a7-b12f-848f43dd0fc8" />
 Each layer has specific responsibilities and depends primarily on the layers below it.
 
 ---
@@ -187,8 +187,7 @@ Component-and-connector structures describe how elements interact at runtime.
 **Service Structure**
 
 The primary runtime interaction is method calls between components:
-
-
+<img width="599" height="1453" alt="Screenshot 2026-03-30 161059" src="https://github.com/user-attachments/assets/2ce48c7d-7fe9-41d4-b97e-c947094535c2" />
 
 **Concurrency Structure**
 
