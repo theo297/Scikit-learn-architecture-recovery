@@ -11,12 +11,13 @@ This document identifies and analyzes the key design patterns used throughout sc
 
 ## 2. Strategy Pattern
 ### 2.1 Pattern Overview
-|Attribute	| Description|
+
+| Attribute | Description |
 |-----------|-------------|
-|Pattern Type	|Behavioral
-|Intent	|Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
-|Problem Solved|	Multiple algorithms for the same task with different tradeoffs; need to switch between them without modifying client code
-Concrete Strategies:
+| Pattern Type | Behavioral |
+| Intent | Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it. |
+| Problem Solved | Multiple algorithms for the same task with different tradeoffs; need to switch between them without modifying client code |
+
 ### 2.2 Implementation in scikit-learn
 
 The Strategy pattern is fundamental to scikit-learn. Every estimator implements the same interface, making algorithms interchangeable.
@@ -199,7 +200,8 @@ Base classes define the algorithm skeleton through methods like fit, which calls
 
 Code Reference: sklearn/base.py - BaseEstimator and base classes
 
-```p# sklearn/base.py - Template method pattern in fit
+```python
+# sklearn/base.py - Template method pattern in fit
 class BaseEstimator:
     def fit(self, X, y=None):
         """Template method defining the fit skeleton."""
@@ -275,7 +277,7 @@ The make_pipeline function creates Pipeline objects with automatically generated
 
 Code Reference: sklearn/pipeline.py - make_pipeline function
 
-```# sklearn/pipeline.py - make_pipeline factory function
+```python sklearn/pipeline.py - make_pipeline factory function
 def make_pipeline(*steps, memory=None, verbose=False):
     """Construct a Pipeline from the given estimators.
     
@@ -393,7 +395,7 @@ class FunctionTransformer(TransformerMixin, BaseEstimator):
 
 **Usage:**
 
-```# The adapter makes any function pipeline-compatible
+```python The adapter makes any function pipeline-compatible
 from sklearn.preprocessing import FunctionTransformer
 
 def custom_preprocessing(X):
