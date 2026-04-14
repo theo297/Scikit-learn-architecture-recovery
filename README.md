@@ -50,7 +50,7 @@ scikit-learn-architecture-project/
 
 ├── component_relationships.png https://github.com/theo297/Scikit-learn-architecture-recovery/blob/56eeead848da6e1fda4b97a0e9400d32c9f0fff9/architecture.md#7-Component-Relationships
 
-├── pattern_interactions_1.png
+├── pattern_interactions_1.png https://github.com/theo297/Scikit-learn-architecture-recovery/blob/56eeead848da6e1fda4b97a0e9400d32c9f0fff9/system_overview.md#8-Pattern-Interactions
 
 
 ### Member 1: Uwasan Teophill [2024326660270]
