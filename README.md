@@ -118,6 +118,28 @@ The following design patterns are used in scikit-learn:
 
 ---
 
+
+## Activity Log
+
+| Name |Work done| 
+|------|---------|
+|Abhilasha Datta | Architecture|
+|Abhilasha Datta | System Overview |
+|Abhilasha Datta| Design patterns |
+|Abhilasha Datta | Quality attributes|
+|Abhilasha Datta | Stake holders|
+|Teophill Uwasan| Base estimator|
+|Teophill Uwasan| Validation|
+|Teophill Uwasan| Pipeline|
+|Teophill Uwasan| Module|
+|Teophill Uwasan| Module Structure|
+|Teophill Uwasan| Influence cycle|
+
+
+
+
+
+
 ### Member 1: Uwasan Teophill [2024326660270]
 
 **Role**: Core Infrastructure & Base System
