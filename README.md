@@ -91,11 +91,11 @@ The following design patterns are used in scikit-learn:
 
 | Priority | Quality Attribute | Status | How Achieved |
 |----------|-------------------|--------|--------------|
-| 1 | Usability | ✅ Enabled | Unified fit/predict interface |
-| 2 | Modifiability | ✅ Enabled | BaseEstimator isolates changes |
-| 3 | Extensibility | ✅ Enabled | Clear extension points |
-| 4 | Performance | ⚠️ Partial | Cython + joblib |
-| 5 | Portability | ✅ Enabled | Pure Python + minimal dependencies |
+| 1 | Usability |  Enabled | Unified fit/predict interface |
+| 2 | Modifiability | Enabled | BaseEstimator isolates changes |
+| 3 | Extensibility | Enabled | Clear extension points |
+| 4 | Performance | Partial | Cython + joblib |
+| 5 | Portability | Enabled | Pure Python + minimal dependencies |
 
 *For detailed analysis, see (architecture.md)*
 
