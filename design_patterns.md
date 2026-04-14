@@ -192,6 +192,19 @@ Code Reference: Any estimator usage in scikit-learn examples shows this uniformi
 - **Flexibility**: Workflows can be nested and composed arbitrarily
 - **Maintainability**: Changes to the composite structure don't affect clients
 
+### 3.5 Why the Composite Pattern Was Chosen
+
+The Composite pattern was chosen for Pipeline because:
+
+| Reason | Explanation |
+|--------|-------------|
+| **Uniform treatment** | Users should not need to know if they are using a single estimator or a pipeline |
+| **Workflow composition** | ML workflows naturally consist of multiple steps (preprocessing → model) |
+| **Nested complexity** | Allows pipelines inside pipelines for complex workflows |
+| **Single responsibility** | Each step does one thing; Pipeline coordinates them |
+
+**Alternative considered:** A procedural function that chains steps. Rejected because it wouldn't integrate with GridSearchCV or provide the same interface.
+
 ---
 
 ## 4. Template Method Pattern
@@ -268,6 +281,19 @@ class LogisticRegression(LinearClassifierMixin, BaseEstimator):
 - **Consistency**: All estimators follow the same validation and fitting pattern
 - **Separation of Concerns**: The skeleton focuses on the algorithm flow; subclasses focus on implementation details
 - **Extensibility**: New algorithms only need to implement the variable steps
+
+### 4.5 Why the Template Method Pattern Was Chosen
+
+The Template Method pattern was chosen for BaseEstimator because:
+
+| Reason | Explanation |
+|--------|-------------|
+| **Consistent validation** | All estimators must validate input the same way |
+| **Code reuse** | Common steps (validation, parameter checking) written once |
+| **Enforced structure** | Ensures all estimators follow the same fit pattern |
+| **Hook methods** | Subclasses can override specific steps without changing the skeleton |
+
+**Alternative considered:** No base class (each estimator implements fit independently). Rejected because it would lead to inconsistent validation and duplicated code.
 
 ---
 
@@ -347,6 +373,18 @@ Code References:
 - **Consistency**: Ensures objects are created with consistent naming and configuration
 - **Readability**: Makes code more concise and expressive
 - **Default Handling**: Provides sensible defaults for optional parameters
+
+### 5.5 Why the Factory Pattern Was Chosen
+
+The Factory pattern was chosen for make_pipeline because:
+
+| Reason | Explanation |
+|--------|-------------|
+| **Simplified creation** | Users don't need to name each step manually |
+| **Convention over configuration** | Step names are auto-generated from class names |
+| **Reduced boilerplate** | Less code for common pipeline creation patterns |
+
+**Alternative considered:** Requiring users to always use Pipeline constructor with named steps. Rejected because it adds verbosity for common cases.
 
 ---
 
@@ -447,6 +485,19 @@ pipeline = Pipeline([
 - **Flexibility**: Any function can become a transformer
 - **Simplicity**: No need to create custom transformer classes for simple operations
 - **Interoperability**: Bridges the gap between simple functions and the transformer interface
+
+  
+### 6.5 Why the Adapter Pattern Was Chosen
+
+The Adapter pattern was chosen for FunctionTransformer because:
+
+| Reason | Explanation |
+|--------|-------------|
+| **Reuse existing code** | Users can use any function as a transformer without modification |
+| **No unnecessary classes** | Simple transformations don't need full transformer classes |
+| **Flexibility** | Works with lambda functions, NumPy functions, custom functions |
+
+**Alternative considered:** Requiring users to implement full transformer classes for every transformation. Rejected because it creates too much boilerplate for simple operations.
 
 ---
 
