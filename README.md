@@ -14,6 +14,25 @@ Recovering the architecture of scikit-learn, focusing on:
 - Key design patterns
 - Data validation flow
 
+  
+  ## Repository Structure
+scikit-learn-architecture-project/
+│
+├── README.md                         
+├── architecture.md  - Core architecture document  [arch.md](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/7e0e0ea493dea6eb000671295e4523e3df7f8e00/arch.md)
+├── system_overview.md - Executive summary                 
+├── design_patterns.md - Pattern analysis                                       
+├── base_estimator.md - Deep dive
+├── validation.md - Validation system
+├── modules.md - Module classification
+│── pipeline.md - Pipeline architecture
+├── high_level_architecture.png
+├── module_structure.png
+├── quality_attributes.png
+├── stakeholders.png
+└── (other diagrams)
+
+
 ### Member 1: Uwasan Teophill [2024326660270]
 
 **Role**: Core Infrastructure & Base System
@@ -42,8 +61,5 @@ Recovering the architecture of scikit-learn, focusing on:
   - Model selection (GridSearchCV, cross_validate)
 - **Secondary Focus**: Meta-estimators (Pipeline, FeatureUnion)
 
-## Repository Structure
-- `/docs` - Architecture documentation and findings
-- `/diagrams` - Architecture diagrams (UML, flowcharts)
-- `/notes` - Individual analysis notes
+
 
