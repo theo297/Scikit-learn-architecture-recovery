@@ -46,7 +46,7 @@ scikit-learn-architecture-project/
 
 ├── influence_cycle.png
 
-├── pipeline_structure.png  
+├── pipeline_structure.png  https://github.com/theo297/Scikit-learn-architecture-recovery/blob/fb8c3536444a9f761f059d1f2ff1d2590b274cbb/pipeline.md#-Data-Flow-Diagram
 
 ├── component_relationships.png https://github.com/theo297/Scikit-learn-architecture-recovery/blob/56eeead848da6e1fda4b97a0e9400d32c9f0fff9/architecture.md#7-Component-Relationships
 
