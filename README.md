@@ -17,8 +17,10 @@ Recovering the architecture of scikit-learn, focusing on:
   
   ## Repository Structure
 scikit-learn-architecture-project/
-│
-├── README.md                         
+
+
+├── README.md      
+
 ├── architecture.md  - Core architecture document  [arch.md](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/7e0e0ea493dea6eb000671295e4523e3df7f8e00/arch.md)
 
 ├── system_overview.md - Executive summary     
