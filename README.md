@@ -39,9 +39,9 @@ scikit-learn-architecture-project/
 
 ├── module_structure.png
 
-├── quality_attributes.png
+├── quality_attributes.png  https://github.com/theo297/Scikit-learn-architecture-recovery/blob/0eb06606197e58b722b752338ba9703ffa0cd17b/stakeholders.md
 
-├── stakeholders.png
+├── stakeholders.png https://github.com/theo297/Scikit-learn-architecture-recovery/blob/0eb06606197e58b722b752338ba9703ffa0cd17b/quality_attributes.md
 
 ├── influence_cycle.png
 
