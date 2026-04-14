@@ -353,8 +353,105 @@ Different stakeholders use different views of the architecture:
 | Project Manager | Allocation View | Team assignments, build process |
 
 ---
+## 11. Business Context and Stakeholders (Chapter 3)
 
-## 11. Summary
+### 11.1 Business Context
+
+scikit-learn operates as an open-source machine learning library supported by Inria (French Institute for Research in Computer Science). Understanding its business context helps explain why certain architectural decisions were made.
+
+**Target Market and Users:**
+
+| User Group | Description | Primary Need |
+|------------|-------------|--------------|
+| Data Scientists | Industry professionals building ML models | Productivity, reliability |
+| Researchers | Academic researchers developing new algorithms | Extensibility, flexibility |
+| Students | Learners in ML courses and bootcamps | Simplicity, teachability |
+| Enterprises | Companies deploying ML in production | Performance, maintainability |
+
+**Market Position:**
+
+scikit-learn occupies a unique position in the ML ecosystem. Unlike TensorFlow or PyTorch which focus on deep learning, scikit-learn focuses on traditional ML algorithms with a simple, consistent API. Its primary differentiators are:
+
+- Unified Estimator interface across all algorithms
+- Deep integration with the scientific Python ecosystem
+- Emphasis on readability and ease of use over raw performance
+- Mature, stable codebase with strong backward compatibility
+
+**Business Model:**
+
+scikit-learn is released under the BSD 3-Clause license, which permits commercial use without requiring derivative works to be open source. This business model prioritizes:
+
+- Widespread adoption over direct revenue
+- Community growth through open source contribution
+- Research impact through citations and academic use
+- Ecosystem development around the library
+
+### 11.2 Stakeholders and Their Concerns
+
+![Stakeholders Diagram](diagrams/stakeholders.png)
+
+The following stakeholders have a stake in scikit-learn's success, each with different concerns that the architecture must address:
+
+| Stakeholder | Primary Concern | How Architecture Addresses It |
+|-------------|-----------------|------------------------------|
+| End Users (Data Scientists) | Ease of use, consistent API | Unified fit/predict interface across all algorithms |
+| Researchers | Ability to implement new algorithms | Extensible BaseEstimator, clear inheritance hierarchy |
+| Enterprise Users | Reliability, performance | Extensive testing, Cython optimization, modular design |
+| Contributors | Clear extension points | Well-defined interfaces, CONTRIBUTING.md guidelines |
+| Sponsors (Inria) | Research impact, community growth | Widely adopted library, cited in thousands of papers |
+| Students/Learners | Simple, teachable patterns | Consistent API reduces learning curve |
+
+### 11.3 Key Quality Concerns Derived from Business Context
+
+Based on the business context and stakeholder needs, the following quality attributes are prioritized:
+
+| Priority | Quality Attribute | Business Driver |
+|----------|-------------------|-----------------|
+| 1 | Usability | Lowers barrier to entry, grows user base |
+| 2 | Modifiability | Allows rapid addition of new algorithms |
+| 3 | Extensibility | Enables third-party ecosystem (scikit-learn-contrib) |
+| 4 | Performance | Competes with other ML libraries |
+| 5 | Portability | Works across platforms (Windows, Linux, macOS) |
+| 6 | Reliability | Trust from enterprise users |
+| 7 | Security | Input validation prevents injection attacks |
+
+![Quality Attributes Diagram](diagrams/quality_attributes.png)
+
+### 11.4 Architecture Influence Cycle
+
+![Architecture Influence Cycle](diagrams/influence_cycle.png)
+
+Following Chapter 3's Architecture Influence Cycle, scikit-learn's architecture both responds to and shapes its contexts:
+
+**Influences on the Architecture (What shaped scikit-learn):**
+
+| Influence Source | Specific Influence | Evidence in Architecture |
+|-----------------|-------------------|-------------------------|
+| Academic research | New algorithms added regularly | HistGradientBoosting, TargetEncoder in recent versions |
+| User feedback | API improvements | Metadata routing, set_output API |
+| Python ecosystem | Dependence on NumPy/SciPy | Core data structures use NumPy arrays |
+| Hardware trends | CPU-only design | No GPU acceleration (by choice) |
+| Competition | Focus on simplicity vs. deep learning | Differentiates from TensorFlow/PyTorch |
+
+**Influences from the Architecture (What scikit-learn shaped):**
+
+| Influence Target | Specific Influence | Evidence |
+|-----------------|-------------------|----------|
+| User expectations | Consistent API across ML libraries | Other libraries adopted fit/predict pattern |
+| Contributor organization | Teams form around modules | Conway's Law visible in CONTRIBUTING.md |
+| Commercial adoption | BSD license enables use | Used by thousands of companies |
+| Third-party ecosystem | scikit-learn-contrib | Over 100 third-party estimators |
+| ML workflows | Pipeline abstraction | Pipeline pattern adopted widely |
+
+### 11.5 How Contexts Interact
+
+The four contexts from Chapter 3 interact to shape scikit-learn:
+
+<img width="982" height="763" alt="image" src="https://github.com/user-attachments/assets/18a65879-fd50-434c-85cb-fb8f277224c6" />
+
+This cycle continues as the architecture evolves, with each new release responding to changing contexts while also shaping future expectations and practices.
+
+## 12. Summary
 
 scikit-learn's architecture is built on a simple but powerful idea: a unified Estimator interface that all algorithms implement. This abstraction, combined with careful separation of concerns and thoughtful use of design patterns, enables:
 
@@ -369,7 +466,7 @@ For anyone learning about software architecture, scikit-learn provides an excell
 
 ---
 
-## 12. References
+## 13. References
 
 | Topic | File Location |
 |-------|---------------|
