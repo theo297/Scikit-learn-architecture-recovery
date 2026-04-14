@@ -114,7 +114,7 @@ The following design patterns are used in scikit-learn:
 - Contexts influence the architecture (technical, business, project life-cycle)
 - The architecture influences back (shapes user expectations, team organization)
 
-*For detailed analysis, see (system_overview.md)*
+*For detailed analysis, see (stakeholder.md)* and (system_overview.md)*  
 
 ---
 
