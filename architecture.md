@@ -88,6 +88,61 @@ The following decisions were made early in scikit-learn's development and are no
 | CPU-only execution model | No GPU acceleration | Architecture not designed for GPU from the start |
 | NumPy and SciPy as core dependencies | Relies on these for data structures | Fundamental to how data is represented |
 
+### 2.5 Benefits and Tradeoffs of Early Design Decisions
+
+For each early architectural decision, there are benefits and also tradeoffs (the opposite of benefits). Understanding both is critical for architecture evaluation.
+
+#### Decision 1: Unified Estimator Interface (fit/predict)
+
+| Aspect | Description |
+|--------|-------------|
+| **Benefits (Pros)** | • Users learn one pattern and can use any algorithm<br>• Algorithms are interchangeable with minimal code changes<br>• Meta-estimators (GridSearchCV, Pipeline) work with any estimator<br>• Reduces cognitive load for beginners |
+| **Opposite of Benefits (Cons/Tradeoffs)** | • Cannot expose algorithm-specific features easily (e.g., SVM's kernel tricks)<br>• Forces all algorithms into the same mold, potentially losing optimization opportunities<br>• Some algorithms don't naturally fit predict pattern (e.g., clustering has no predict)<br>• Adds abstraction overhead for simple operations |
+
+#### Decision 2: BaseEstimator Inheritance with get_params/set_params
+
+| Aspect | Description |
+|--------|-------------|
+| **Benefits (Pros)** | • Enables hyperparameter tuning via GridSearchCV<br>• Provides consistent parameter introspection across all estimators<br>• Allows cloning of estimators for cross-validation<br>• Simplifies serialization and deserialization |
+| **Opposite of Benefits (Cons/Tradeoffs)** | • Forces all estimators to use the same parameter pattern<br>• Cannot use *args or **kwargs in __init__ (enforced by BaseEstimator)<br>• Adds boilerplate code for simple estimators<br>• Parameter naming must follow conventions (no spaces, special chars) |
+
+#### Decision 3: Python-first with Cython for Performance
+
+| Aspect | Description |
+|--------|-------------|
+| **Benefits (Pros)** | • Python is easy to write, read, and debug<br>• Large ecosystem of scientific libraries (NumPy, SciPy)<br>• Cython provides near-C performance for critical loops<br>• Attracts a large contributor community |
+| **Opposite of Benefits (Cons/Tradeoffs)** | • Python overhead for non-optimized code<br>• Cython code is harder to write and debug than pure Python<br>• Two-language problem: contributors need to know both<br>• Slower than pure C++ implementations (e.g., XGBoost) |
+
+#### Decision 4: CPU-only Execution Model
+
+| Aspect | Description |
+|--------|-------------|
+| **Benefits (Pros)** | • Simple deployment (no GPU drivers, no CUDA)<br>• Works on any machine, including cloud VMs without GPUs<br>• No GPU memory management complexity<br>• Focuses on traditional ML, not deep learning |
+| **Opposite of Benefits (Cons/Tradeoffs)** | • Cannot leverage GPU for large-scale computations<br>• Slower for deep learning workloads (but not the target)<br>• Not competitive with GPU-accelerated libraries for certain tasks<br>• Limits scalability for massive datasets |
+
+#### Decision 5: NumPy/SciPy as Core Dependencies
+
+| Aspect | Description |
+|--------|-------------|
+| **Benefits (Pros)** | • Leverages mature, optimized numerical libraries<br>• Access to sparse matrices, linear algebra, random number generation<br>• Broad ecosystem integration (pandas, matplotlib)<br>• Vectorized operations for performance |
+| **Opposite of Benefits (Cons/Tradeoffs)** | • Forces users to install large dependencies (hundreds of MB)<br>• Limited to NumPy data structures (cannot easily use other array types)<br>• Some algorithms difficult to implement efficiently within NumPy constraints<br>• Slow for non-vectorized operations |
+
+### 2.6 Subsystems Identified (How Many Subsystems?)
+
+Based on the architecture recovery, scikit-learn can be decomposed into the following subsystems:
+
+| Subsystem | Components | Responsibility |
+|-----------|------------|----------------|
+| **Estimator Core** | BaseEstimator, Mixins | Defines the estimator contract and parameter management |
+| **Supervised Learning** | linear_model/, ensemble/, tree/, svm/, neighbors/ | Classification and regression algorithms |
+| **Unsupervised Learning** | cluster/, decomposition/, manifold/, mixture/ | Clustering and dimensionality reduction |
+| **Data Transformation** | preprocessing/, feature_extraction/, feature_selection/, impute/ | Data preparation and feature engineering |
+| **Model Selection** | model_selection/, metrics/, inspection/ | Cross-validation, tuning, and evaluation |
+| **Composition** | pipeline/, compose/ | Building complex workflows from simple components |
+| **Infrastructure** | utils/, externals/, tests/ | Shared utilities and testing framework |
+
+**Total: 7 major subsystems**
+
 ---
 
 ## 3. High-Level Architecture Diagram
