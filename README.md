@@ -27,7 +27,7 @@ scikit-learn-architecture-project/
 
 ├── design_patterns.md - Pattern analysis   https://github.com/theo297/Scikit-learn-architecture-recovery/blob/56eeead848da6e1fda4b97a0e9400d32c9f0fff9/system_overview.md
 
-├── base_estimator.md - Deep dive
+├── base_estimator.md - Deep dive base_estimator.md
 
 ├── validation.md - Validation system
 
