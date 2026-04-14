@@ -88,6 +88,21 @@ Code Reference: sklearn/model_selection/_search.py - GridSearchCV works with any
    - Encapsulation: Algorithm details are hidden behind the common interface
     -Extensibility: New algorithms can be added without modifying existing code
     -Testability: Each strategy can be tested independently
+
+
+### 2.5 Why the Strategy Pattern Was Chosen
+
+The Strategy pattern was chosen for scikit-learn because:
+
+| Reason | Explanation |
+|--------|-------------|
+| **Multiple algorithms for same task** | Classification can be done with logistic regression, random forest, SVM, etc. Strategy allows users to choose |
+| **Runtime interchangeability** | Users can experiment with different algorithms without rewriting code |
+| **Open-closed principle** | New algorithms can be added without modifying existing code |
+| **Separation of concerns** | Algorithm implementation is separated from the context that uses it |
+| **Industry standard** | This pattern is well-understood by ML practitioners |
+
+**Alternative considered:** A single monolithic algorithm class with conditional branches. Rejected because it would violate open-closed principle and make testing impossible.
 ---
 
 ## 3. Composite Pattern
