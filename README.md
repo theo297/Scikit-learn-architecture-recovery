@@ -21,11 +21,11 @@ scikit-learn-architecture-project/
 
 ├── README.md      
 
-├── architecture.md  - Core architecture document  
+├── architecture.md  - Core architecture document   https://github.com/theo297/Scikit-learn-architecture-recovery/blob/56eeead848da6e1fda4b97a0e9400d32c9f0fff9/architecture.md
 
-├── system_overview.md - Executive summary  
+├── system_overview.md - Executive summary  https://github.com/theo297/Scikit-learn-architecture-recovery/blob/56eeead848da6e1fda4b97a0e9400d32c9f0fff9/design_patterns.md
 
-├── design_patterns.md - Pattern analysis  
+├── design_patterns.md - Pattern analysis   https://github.com/theo297/Scikit-learn-architecture-recovery/blob/56eeead848da6e1fda4b97a0e9400d32c9f0fff9/system_overview.md
 
 ├── base_estimator.md - Deep dive
 
