@@ -127,7 +127,7 @@ The following design patterns are used in scikit-learn:
 |Abhilasha Datta | System Overview |
 |Abhilasha Datta| Design patterns |
 |Abhilasha Datta | Quality attributes|
-|Abhilasha Datta | Stake holders|
+|Abhilasha Datta | Stakeholders|
 |Teophill Uwasan| Base estimator|
 |Teophill Uwasan| Validation|
 |Teophill Uwasan| Pipeline|
