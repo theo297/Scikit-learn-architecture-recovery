@@ -30,13 +30,26 @@ scikit-learn-architecture-project/
 ├── base_estimator.md - Deep dive
 
 ├── validation.md - Validation system
+
 ├── modules.md - Module classification
+
 │── pipeline.md - Pipeline architecture
+
 ├── high_level_architecture.png
+
 ├── module_structure.png
+
 ├── quality_attributes.png
+
 ├── stakeholders.png
-└── (other diagrams)
+
+├── influence_cycle.png
+
+├── pipeline_structure.png  
+
+├── component_relationships.png 
+
+├── pattern_interactions_1.png
 
 
 ### Member 1: Uwasan Teophill [2024326660270]
