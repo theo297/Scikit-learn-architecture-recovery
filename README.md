@@ -15,7 +15,7 @@ Recovering the architecture of scikit-learn, focusing on:
 - Data validation flow
 
   
-  ## Repository Structure
+## Repository Structure
 scikit-learn-architecture-project/
 
 
