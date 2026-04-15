@@ -138,7 +138,11 @@ The following design patterns are used in scikit-learn:
 |Teophill Uwasan| Influence cycle|
 
 references:
+
+
 https://github.com/scikit-learn/scikit-learn
+
+
 https://scikit-learn.org/
 
 
