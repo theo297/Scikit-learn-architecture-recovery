@@ -31,7 +31,7 @@ Recovering the architecture of scikit-learn, focusing on:
 | Diagram | Description | Link|
 |---------|---------|-------------|
 |high_level_architecture| Layered architecture |[View](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/56eeead848da6e1fda4b97a0e9400d32c9f0fff9/architecture.md#3-High-Level-Architecture-Diagram)|
-|module_structure | Decomposition + layer + class | [View](---)|
+|module_structure | Decomposition + layer + class | [View](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/2a513df28e5ad42df871bb790317853394aba2e2/module_structure.md)|
 |quality_attributes| Quality attribute analysis |[View](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/0eb06606197e58b722b752338ba9703ffa0cd17b/quality_attributes.md)|
 |stakeholders |  Diagram showing stakeholders (users, researchers, enterprises, contributors, sponsors) |[View](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/0eb06606197e58b722b752338ba9703ffa0cd17b/stakeholders.md)|
 |influence_cycle| Architecture influence cycle |[View](---)|
