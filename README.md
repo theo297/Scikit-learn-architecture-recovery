@@ -36,8 +36,7 @@ Recovering the architecture of scikit-learn, focusing on:
 |module_structure | Decomposition + layer + class | [View](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/2a513df28e5ad42df871bb790317853394aba2e2/module_structure.md)|
 |quality_attributes| Quality attribute analysis |[View](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/0eb06606197e58b722b752338ba9703ffa0cd17b/quality_attributes.md)|
 |stakeholders |  Diagram showing stakeholders (users, researchers, enterprises, contributors, sponsors) |[View](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/0eb06606197e58b722b752338ba9703ffa0cd17b/stakeholders.md)|
-|influence_cycle| Architecture influence cycle |[View] |
-|pipeline_structure.png| Diagram showing data flow through pipeline transformers to final estimator | [View](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/12e7c937e4677dc7a7438c2372ca2cabd5b5b0fb/influence%20_cycle.md)|
+|influence_cycle| Architecture influence cycle |([View] https://github.com/theo297/Scikit-learn-architecture-recovery/blob/12e7c937e4677dc7a7438c2372ca2cabd5b5b0fb/influence%20_cycle.md)|
 |component_relationships | Diagram showing inheritance and composition relationships between components | [View](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/56eeead848da6e1fda4b97a0e9400d32c9f0fff9/architecture.md#7-Component-Relationships) |
 |pattern_interactions_1 | Diagram showing how Strategy, Composite, Template Method, Factory, Adapter interact | [View](https://github.com/theo297/Scikit-learn-architecture-recovery/blob/56eeead848da6e1fda4b97a0e9400d32c9f0fff9/design_patterns.md#8-Pattern-Interactions) |
 
