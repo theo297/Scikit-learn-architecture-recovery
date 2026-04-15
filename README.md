@@ -137,6 +137,8 @@ The following design patterns are used in scikit-learn:
 |Teophill Uwasan| Module Structure|
 |Teophill Uwasan| Influence cycle|
 
+
+
 references:
 
 
