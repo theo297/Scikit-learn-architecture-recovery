@@ -124,17 +124,17 @@ The following design patterns are used in scikit-learn:
 
 | Name |Work done| Date |
 |------|---------| ---- |
-|Abhilasha Datta | Architecture||
-|Abhilasha Datta | System Overview ||
-|Abhilasha Datta| Design patterns ||
-|Abhilasha Datta | Quality attributes||
-|Abhilasha Datta | Stakeholders||
-|Teophill Uwasan| Base estimator||
-|Teophill Uwasan| Validation||
-|Teophill Uwasan| Pipeline||
-|Teophill Uwasan| Module||
-|Teophill Uwasan| Module Structure||
-|Teophill Uwasan| Influence cycle||
+|Abhilasha Datta | Architecture|Week 2 |
+|Abhilasha Datta | System Overview | Week 2 |
+|Abhilasha Datta| Design patterns | Week 3 |
+|Abhilasha Datta | Quality attributes| Week 4 |
+|Abhilasha Datta | Stakeholders| Week 4 |
+|Teophill Uwasan| Base estimator| Week 3 |
+|Teophill Uwasan| Validation| Week 4 |
+|Teophill Uwasan| Pipeline| Week 4 |
+|Teophill Uwasan| Module| Week 4 |
+|Teophill Uwasan| Module Structure| Week 4 |
+|Teophill Uwasan| Influence cycle| Week 4 |
 
 
 
