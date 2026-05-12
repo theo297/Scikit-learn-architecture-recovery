@@ -17,14 +17,14 @@
 |---|---------|
 | 1 | [Project Overview](#1-project-overview) |
 | 2 | [Architecture Recovery Method](#2-architecture-recovery-method) |
-| 3 | [Module Structures — Chapter 1](#3-module-structures--chapter-1) |
-| 4 | [Component-and-Connector Structures — Chapter 1](#4-component-and-connector-structures--chapter-1) |
-| 5 | [Allocation Structures — Chapter 1](#5-allocation-structures--chapter-1) |
-| 6 | [Early Architecture Decisions — Chapter 2](#6-early-architecture-decisions--chapter-2) |
-| 7 | [Quality Attributes — Chapter 2](#7-quality-attributes--chapter-2) |
-| 8 | [Business Context and Stakeholders — Chapter 3](#8-business-context-and-stakeholders--chapter-3) |
-| 9 | [Quality Attribute Tactics — Chapter 4](#9-quality-attribute-tactics--chapter-4) |
-| 10 | [Patterns and Tactics — Chapter 13](#10-patterns-and-tactics--chapter-13) |
+| 3 | [Module Structures](#3-module-structures) |
+| 4 | [Component-and-Connector Structures](#4-component-and-connector-structures) |
+| 5 | [Allocation Structures ](#5-allocation-structures) |
+| 6 | [Early Architecture Decisions](#6-early-architecture-decisions) |
+| 7 | [Quality Attributes](#7-quality-attributes) |
+| 8 | [Business Context and Stakeholders](#8-business-context-and-stakeholders) |
+| 9 | [Quality Attribute Tactics ](#9-quality-attribute-tactics) |
+| 10 | [Patterns and Tactics ](#10-patterns-and-tactics) |
 | 11 | [Activity Log](#11-activity-log) |
 | 12 | [References](#12-references) |
 
@@ -93,31 +93,57 @@ The sklearn/ directory is decomposed into modules, each with a specific computat
 
 
 sklearn/
+
 ├── base.py                    # BaseEstimator, Mixins — lines 67–297
+
 ├── linear_model/              # Supervised: linear algorithms
+
 │   ├── _base.py               # Shared linear model base
+
 │   ├── _logistic.py           # LogisticRegression
+
 │   └── _ridge.py              # Ridge regression
+
 ├── ensemble/                  # Supervised: ensemble algorithms
+
 │   ├── _forest.py             # RandomForestClassifier/Regressor
+
 │   └── _gb.py                 # GradientBoostingClassifier
+
 ├── tree/                      # Supervised: tree-based algorithms
+
 │   ├── _classes.py            # DecisionTreeClassifier
+
 │   └── _tree.pyx              # Cython core (performance-critical)
+
 ├── svm/                       # Supervised: support vector machines
+
 │   └── _classes.py            # SVC, SVR
+
 ├── cluster/                   # Unsupervised: clustering
+
 │   └── _kmeans.py             # KMeans
+
 ├── decomposition/             # Unsupervised: dimensionality reduction
+
 │   └── _pca.py                # PCA
+
 ├── preprocessing/             # Transformer: data scaling/encoding
+
 │   └── _data.py               # StandardScaler, MinMaxScaler
+
 ├── feature_selection/         # Transformer: feature filtering
+
 ├── impute/                    # Transformer: missing value handling
+
 ├── pipeline.py                # Composition: Pipeline, FeatureUnion
+
 ├── utils/                     # Infrastructure: shared utilities
+
 │   └── validation.py          # check_array, check_X_y
+
 └── model_selection/           # Infrastructure: cross-validation
+
 └── _search.py             # GridSearchCV
 
 **Module Classification:**
