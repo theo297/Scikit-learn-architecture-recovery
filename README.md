@@ -119,6 +119,7 @@ sklearn/
 └── model_selection/           # Infrastructure: cross-validation
     └── _search.py             # GridSearchCV
 
+```
 
 **Module Classification:**
 
