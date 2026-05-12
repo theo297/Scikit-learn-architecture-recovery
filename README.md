@@ -92,59 +92,7 @@ Module structures describe how the system is decomposed into implementation unit
 The sklearn/ directory is decomposed into modules, each with a specific computational responsibility. This decomposition determines modifiability — changes to one module (e.g., adding a new solver to linear_model/) do not affect others.
 
 
-sklearn/
 
-├── base.py                    # BaseEstimator, Mixins — lines 67–297
-
-├── linear_model/              # Supervised: linear algorithms
-
-│   ├── _base.py               # Shared linear model base
-
-│   ├── _logistic.py           # LogisticRegression
-
-│   └── _ridge.py              # Ridge regression
-
-├── ensemble/                  # Supervised: ensemble algorithms
-
-│   ├── _forest.py             # RandomForestClassifier/Regressor
-
-│   └── _gb.py                 # GradientBoostingClassifier
-
-├── tree/                      # Supervised: tree-based algorithms
-
-│   ├── _classes.py            # DecisionTreeClassifier
-
-│   └── _tree.pyx              # Cython core (performance-critical)
-
-├── svm/                       # Supervised: support vector machines
-
-│   └── _classes.py            # SVC, SVR
-
-├── cluster/                   # Unsupervised: clustering
-
-│   └── _kmeans.py             # KMeans
-
-├── decomposition/             # Unsupervised: dimensionality reduction
-
-│   └── _pca.py                # PCA
-
-├── preprocessing/             # Transformer: data scaling/encoding
-
-│   └── _data.py               # StandardScaler, MinMaxScaler
-
-├── feature_selection/         # Transformer: feature filtering
-
-├── impute/                    # Transformer: missing value handling
-
-├── pipeline.py                # Composition: Pipeline, FeatureUnion
-
-├── utils/                     # Infrastructure: shared utilities
-
-│   └── validation.py          # check_array, check_X_y
-
-└── model_selection/           # Infrastructure: cross-validation
-
-└── _search.py             # GridSearchCV
 
 **Module Classification:**
 
