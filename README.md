@@ -167,8 +167,7 @@ DIA 2
 
 This diagram combines decomposition, layer, and class views to show the complete module structure with explicitly labeled relationships. It is consistent with the text descriptions above.
 
-
-DIA 3
+<img width="724" height="1127" alt="Screenshot 2026-05-12 191109" src="https://github.com/user-attachments/assets/fe8108d2-ea79-4f56-b11f-7dfc6cbe0da5" />
 
 
 ---
@@ -190,7 +189,8 @@ DIA 4
 When `n_jobs > 1` is set (e.g., in RandomForest or GridSearchCV), joblib.Parallel is the **connector** that distributes work across child processes. Components (estimator copies) run independently. This is the architecture of parallelism — not a function flow.
 
 
-DIA 5
+<img width="796" height="1154" alt="Screenshot 2026-05-12 191137" src="https://github.com/user-attachments/assets/048ba68e-9ad7-414a-b5f6-209ae1556f2b" />
+
 
 
 ### 4.3 Pipeline Composite Structure — Connector Chain
@@ -198,7 +198,7 @@ DIA 5
 The Pipeline is a C&C structure where estimators are components and the data-passing protocol (NumPy array from one output port to the next input port) is the connector. This is a Pipe-and-Filter style at the component level.
 
 
-DIA 6
+<img width="828" height="444" alt="Screenshot 2026-05-12 191149" src="https://github.com/user-attachments/assets/057af6cd-26fa-4285-b0cc-c52475bf7b41" />
 
 
 ---
@@ -506,7 +506,7 @@ Per Chapter 13, patterns are packages of design decisions (collections of tactic
 ### 10.4 Pattern Interactions — Architectural View
 
 
-DIA 7
+<img width="703" height="1366" alt="Screenshot 2026-05-12 191201" src="https://github.com/user-attachments/assets/228dbf99-8736-4664-a0f8-8e2cf0b65baf" />
 
 
 ---
