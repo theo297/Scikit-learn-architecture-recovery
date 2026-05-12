@@ -204,7 +204,7 @@ The Pipeline is a C&C structure where estimators are components and the data-pas
 
 ---
 
-## 5. Allocation Structures — Chapter 1
+## 5. Allocation Structures 
 
 Allocation structures map software elements to non-software environments (hardware, file systems, development teams).
 
@@ -381,7 +381,7 @@ The architecture achieves high reusability at multiple levels:
 
 ---
 
-## 8. Business Context and Stakeholders — Chapter 3
+## 8. Business Context and Stakeholders 
 
 ### 8.1 Business Context
 
@@ -526,8 +526,8 @@ Per Chapter 13, patterns are packages of design decisions (collections of tactic
 | 6 | Apr 5–9, 2026 | Teophill Uwasan | Corrected module classifications, fixed layer diagram, added relationship labels | modules.md, module_structure.md |
 | 7 | Apr 12–16, 2026 | Teophill Uwasan | Chapter 4 tactics analysis, Chapter 13 patterns-and-tactics, pattern interactions diagram | README.md |
 | 8 | Apr 19–23, 2026 | Abhilasha Datta  | Consolidated all documents into single README.md, resolved teacher feedback | README.md |
-| 9 | Apr 26–30, 2026 | Abhilasha Datta  | Final review: added dates to log, corrected C&C diagrams to remove function flow, added reusability detail, fixed pattern interaction to architectural view | README.md |
-| 10 | May 1–8, 2026 | Teophill Uwasan | Final submission preparation, index added, all teacher feedback incorporated | README.md |
+| 9 | Apr 26–30, 2026 | Whole team   | Final review: added dates to log, corrected C&C diagrams to remove function flow, added reusability detail, fixed pattern interaction to architectural view | README.md |
+| 10 | May 1–8, 2026 | Whole team | Final submission preparation, index added, all teacher feedback incorporated | README.md |
 
 ---
 
