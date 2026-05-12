@@ -90,7 +90,7 @@ Module structures describe how the system is decomposed into implementation unit
 ### 3.1 Decomposition Structure
 
 The sklearn/ directory is decomposed into modules, each with a specific computational responsibility. This decomposition determines modifiability — changes to one module (e.g., adding a new solver to linear_model/) do not affect others.
-
+```
 sklearn/
 ├── base.py                    # BaseEstimator, Mixins — lines 67–297
 ├── linear_model/              # Supervised: linear algorithms
@@ -117,7 +117,7 @@ sklearn/
 ├── utils/                     # Infrastructure: shared utilities
 │   └── validation.py          # check_array, check_X_y
 └── model_selection/           # Infrastructure: cross-validation
-└── _search.py             # GridSearchCV
+    └── _search.py             # GridSearchCV
 
 
 **Module Classification:**
