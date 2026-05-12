@@ -209,6 +209,7 @@ The Pipeline is a C&C structure where estimators are components and the data-pas
 Allocation structures map software elements to non-software environments (hardware, file systems, development teams).
 
 ### 5.1 Implementation Structure — GitHub Repository
+```
 scikit-learn/              ← Root repository
 ├── sklearn/               ← All source code (maps to module structure)
 │   ├── base.py
@@ -221,6 +222,7 @@ scikit-learn/              ← Root repository
 ├── benchmarks/            ← Performance benchmarking scripts
 ├── build_tools/           ← CI/CD scripts
 └── CONTRIBUTING.md        ← Work assignment guidelines### 5.2 Deployment Structure
+```
 
 | Aspect | scikit-learn Configuration |
 |--------|---------------------------|
