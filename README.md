@@ -137,7 +137,7 @@ sklearn/
 The layer structure shows which modules are allowed to use which other modules. Dependencies are strictly unidirectional — lower layers never depend on upper layers. This gives the system portability and modifiability.
 
 
-DIA 1
+<img width="655" height="739" alt="@" src="https://github.com/user-attachments/assets/dd3d0912-4859-41b8-8ab7-c97f2eb58c6f" />
 
 
 **Dependency Rules (Layer Structure):**
@@ -150,9 +150,7 @@ DIA 1
 
 The class structure shows inheritance (is-a) and composition (has-a) relationships between the major classes. This is the basis for scikit-learn's Strategy pattern: all estimators share a common interface through inheritance.
 
-
-DIA 2
-
+<img width="699" height="812" alt="#" src="https://github.com/user-attachments/assets/82efe85c-601d-42e1-a87b-c62583fd3fa8" />
 
 **Relationships Summary:**
 
@@ -181,8 +179,7 @@ C&C structures describe how architectural elements interact at **runtime**. Per 
 
 In scikit-learn, each estimator is a **service component** that accepts data through defined ports and returns results. The connector is the synchronous method-call protocol over NumPy array data. The Validation Utilities act as a gating connector — data cannot pass to the estimator without first traversing validation.
 
-
-DIA 4
+<img width="742" height="765" alt="!" src="https://github.com/user-attachments/assets/a5139a95-c9a1-41bd-8fa1-6d125e17492f" />
 
 
 ### 4.2 Concurrency Structure — Joblib Parallel Execution
