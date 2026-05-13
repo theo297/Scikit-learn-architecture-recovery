@@ -235,7 +235,7 @@ scikit-learn/              ← Root repository
 
 ### 5.3 Work Assignment Structure (Conway's Law)
 
-As described in Chapter 3, organizations that design systems produce architectures that mirror their communication structures. scikit-learn's module boundaries map directly to contributor team organization:
+As described , organizations that design systems produce architectures that mirror their communication structures. scikit-learn's module boundaries map directly to contributor team organization:
 
 | Module Group | Assigned To | Communication Path |
 |---|---|---|
