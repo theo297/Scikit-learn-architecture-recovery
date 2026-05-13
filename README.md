@@ -85,7 +85,7 @@ scikit-learn is an open-source machine learning library for Python, built on Num
 
 ## 3. Module Structures 
 
-Module structures describe how the system is decomposed into implementation units (modules), their responsibilities, and the relationships between them. Per Chapter 1, three module structure types are used: decomposition, layer, and class (generalization).
+Module structures describe how the system is decomposed into implementation units (modules), their responsibilities, and the relationships between them. The three module structure types are used: decomposition, layer, and class (generalization).
 
 ### 3.1 Decomposition Structure
 
@@ -173,18 +173,18 @@ This diagram combines decomposition, layer, and class views to show the complete
 
 ## 4. Component-and-Connector Structures 
 
-C&C structures describe how architectural elements interact at **runtime**. Per Chapter 1, C&C elements are components (runtime entities with state and behavior) connected by connectors (interaction mechanisms). The focus is on how the architecture enables communication — not on individual function calls.
+C&C structures describe how architectural elements interact at runtime. C&C elements are components (runtime entities with state and behavior) connected by connectors (interaction mechanisms). The focus is on how the architecture enables communication , not on individual function calls.
 
 ### 4.1 Service Structure — Estimator as a Service Component
 
-In scikit-learn, each estimator is a **service component** that accepts data through defined ports and returns results. The connector is the synchronous method-call protocol over NumPy array data. The Validation Utilities act as a gating connector — data cannot pass to the estimator without first traversing validation.
+In scikit-learn, each estimator is a service component that accepts data through defined ports and returns results. The connector is the synchronous method-call protocol over NumPy array data. The Validation Utilities act as a gating connector — data cannot pass to the estimator without first traversing validation.
 
 <img width="742" height="765" alt="!" src="https://github.com/user-attachments/assets/a5139a95-c9a1-41bd-8fa1-6d125e17492f" />
 
 
 ### 4.2 Concurrency Structure — Joblib Parallel Execution
 
-When `n_jobs > 1` is set (e.g., in RandomForest or GridSearchCV), joblib.Parallel is the **connector** that distributes work across child processes. Components (estimator copies) run independently. This is the architecture of parallelism — not a function flow.
+When `n_jobs > 1` is set (e.g., in RandomForest or GridSearchCV), joblib.Parallel is the connector that distributes work across child processes. Components (estimator copies) run independently. This is the architecture of parallelism — not a function flow.
 
 
 <img width="796" height="1154" alt="Screenshot 2026-05-12 191137" src="https://github.com/user-attachments/assets/048ba68e-9ad7-414a-b5f6-209ae1556f2b" />
@@ -249,7 +249,7 @@ As described , organizations that design systems produce architectures that mirr
 
 ## 6. Early Architecture Decisions 
 
-Per Chapter 2, software architecture embodies the **earliest, hardest-to-change** design decisions. These decisions constrain all subsequent implementation. The high-level layer structure in Section 3.2 is the direct architectural manifestation of each decision below.
+Software architecture embodies the earliest, hardest-to-change design decisions. These decisions constrain all subsequent implementation. The high-level layer structure in Section 3.2 is the direct architectural manifestation of each decision below.
 
 ### 6.1 How the High-Level Architecture Expresses Early Decisions
 
@@ -327,7 +327,7 @@ The layer structure from Section 3.2 maps directly to these early decisions:
 
 ## 7. Quality Attributes 
 
-Per Chapter 2, quality attributes are substantially determined by the architecture. The architecture either **enables** or **inhibits** each quality attribute.
+Quality attributes are substantially determined by the architecture. The architecture either enables or inhibits each quality attribute.
 
 ### 7.1 Quality Attribute Analysis
 
@@ -413,7 +413,7 @@ scikit-learn exists to serve the scientific and data science communities as a fr
 
 ### 8.3 Architecture Influence Cycle 
 
-**Influences ON the Architecture (Context → Architecture):**
+Influences ON the Architecture (Context → Architecture):
 
 | Influence Source | Context Type | Specific Influence | Architectural Evidence |
 |---|---|---|---|
@@ -423,7 +423,7 @@ scikit-learn exists to serve the scientific and data science communities as a fr
 | Hardware trends (GPU) | Technical | GPUs became dominant for deep learning | Explicit decision to remain CPU-only and not compete in that space |
 | Open-source community | Project life-cycle | Contributors organize around module boundaries | Conway's Law — module ownership mirrors team structure |
 
-**Influences FROM the Architecture (Architecture → Context):**
+Influences FROM the Architecture (Architecture → Context):
 
 | Influence Target | Specific Influence | Evidence |
 |---|---|---|
@@ -435,9 +435,9 @@ scikit-learn exists to serve the scientific and data science communities as a fr
 
 ---
 
-## 9. Quality Attribute Tactics — Chapter 4
+## 9. Quality Attribute Tactics
 
-Per Chapter 4, an **architectural tactic** is a primitive design decision that directly affects a quality attribute response. Tactics are the atoms from which patterns are built. The seven categories of architectural design decisions from Chapter 4 are applied below.
+An architectural tactic is a primitive design decision that directly affects a quality attribute response. Tactics are the atoms from which patterns are built. The seven categories of architectural design decisions are applied below.
 
 ### 9.1 Tactics Identified in scikit-learn
 
@@ -456,7 +456,7 @@ Per Chapter 4, an **architectural tactic** is a primitive design decision that d
 
 ### 9.2 Seven Design Decision Categories Applied 
 
-| Ch. 4 Category | scikit-learn Decision | Architectural Location |
+| Category Names | scikit-learn Decision | Architectural Location |
 |---|---|---|
 | 1. Allocation of Responsibilities | BaseEstimator handles parameter management; algorithm classes handle only learning logic | base.py separation from algorithm modules |
 | 2. Coordination Model | Synchronous call-return for training; asynchronous process-based parallel for n_jobs > 1 | Validation flow (sync); joblib (async multi-process) |
@@ -469,8 +469,7 @@ Per Chapter 4, an **architectural tactic** is a primitive design decision that d
 ---
 
 ## 10. Patterns and Tactics 
-
-Per Chapter 13, patterns are packages of design decisions (collections of tactics) that solve recurring problems. Tactics are simpler than patterns. Patterns are underspecified with respect to real systems and must be augmented with additional tactics to address their weaknesses.
+Patterns are packages of design decisions (collections of tactics) that solve recurring problems. Tactics are simpler than patterns. Patterns are underspecified with respect to real systems and must be augmented with additional tactics to address their weaknesses.
 
 ### 10.1 Patterns Identified in scikit-learn
 
@@ -522,10 +521,10 @@ Per Chapter 13, patterns are packages of design decisions (collections of tactic
 | 4 | Mar 22–26, 2026 | Abhilasha Datta  | Integration of all documents, initial README creation, cross-referencing | README.md |
 | 5 | Mar 29–Apr 2, 2026 | Abhilasha Datta | Chapter 3: Business context, stakeholders, architecture influence cycle | system_overview.md |
 | 6 | Apr 5–9, 2026 | Teophill Uwasan | Corrected module classifications, fixed layer diagram, added relationship labels | modules.md, module_structure.md |
-| 7 | Apr 12–16, 2026 | Teophill Uwasan | Chapter 4 tactics analysis, Chapter 13 patterns-and-tactics, pattern interactions diagram | README.md |
+| 7 | Apr 12–16, 2026 | Teophill Uwasan | Chapter 4 tactics analysis, Chapter 5 patterns-and-tactics, pattern interactions diagram | README.md |
 | 8 | Apr 19–23, 2026 | Abhilasha Datta  | Consolidated all documents into single README.md, resolved teacher feedback | README.md |
 | 9 | Apr 26–30, 2026 | Whole team   | Final review: added dates to log, corrected C&C diagrams to remove function flow, added reusability detail, fixed pattern interaction to architectural view | README.md |
-| 10 | May 1–8, 2026 | Whole team | Final submission preparation, index added, all teacher feedback incorporated | README.md |
+| 10 | May 1–8, 2026 | Whole team | Final preparation, index added, all teacher feedback incorporated | README.md |
 
 ---
 
