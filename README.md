@@ -223,6 +223,7 @@ scikit-learn/              ← Root repository
 ├── build_tools/           ← CI/CD scripts
 └── CONTRIBUTING.md        ← Work assignment guidelines### 5.2 Deployment Structure
 ```
+### 5.2 Deployment Structure
 
 | Aspect | scikit-learn Configuration |
 |--------|---------------------------|
